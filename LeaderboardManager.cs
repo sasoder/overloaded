@@ -32,7 +32,7 @@ public class LeaderboardManager : MonoBehaviour
         {
             if(response.success) {
                 Debug.Log("Logged in!!!");
-                // PlayerPrefs.SetString("hiScoreID", response.player_id.ToString());
+                PlayerPrefs.SetString("hiScoreID", response.player_id.ToString());
                 done = true;
             } else {
                 Debug.Log("Could not start session");

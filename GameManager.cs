@@ -13,8 +13,7 @@ public class GameManager : MonoBehaviour
     private int best;
     public string gameMode;
     public TextMeshPro scoreText;
-    // TODO
-    // public TextMeshPro bestText;
+    public TextMeshPro bestText;
     public TextMeshPro livesText;
     public GameObject timerText;
     public GameObject payloadText;
@@ -27,7 +26,6 @@ public class GameManager : MonoBehaviour
     private Light l;
     public int lives;
     public int leaderboardID;
-    public string playerName;
     GameObject musicObj;
 
     void Awake() {
@@ -46,8 +44,7 @@ public class GameManager : MonoBehaviour
         }
         StartCoroutine(LoginRoutine());
         score = 0;
-        // TODO
-        // best = PlayerPrefs.GetInt(gameMode, 0);
+        best = PlayerPrefs.GetInt(gameMode, 0);
         source = GetComponent<AudioSource>();
         l = lightObject.GetComponent<Light>();
         UpdateScore();
@@ -76,7 +73,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Booyah!");
         Debug.Log(score);
         if(score > best) {
-            // PlayerPrefs.SetInt(gameMode, score);
+            PlayerPrefs.SetInt(gameMode, score);
             best = score;
         }
         UpdateScore();
@@ -99,8 +96,7 @@ public class GameManager : MonoBehaviour
         retry.SetActive(true);
         l.intensity = 0;
         scoreText.color = Color.black;
-        // TODO
-        // bestText.color = Color.black;
+        bestText.color = Color.black;
         source.Stop();
         source.PlayOneShot(gameOverSound);
         gameOver = true;
@@ -112,7 +108,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateScore() {
         scoreText.text = score.ToString();
-        // bestText.text = "best: " + best.ToString();
+        bestText.text = "best: " + best.ToString();
     }
 
     private IEnumerator LoginRoutine()
@@ -123,8 +119,7 @@ public class GameManager : MonoBehaviour
         {
             if(response.success) {
                 Debug.Log("Logged in!!!");
-                // TODO
-                // PlayerPrefs.SetString("hiScoreID", response.player_id.ToString());
+                PlayerPrefs.SetString("hiScoreID", response.player_id.ToString());
                 done = true;
             } else {
                 Debug.Log("Could not start session");
@@ -136,9 +131,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SubmitScoreRoutine(int scoreToUpload) {
         bool done = false;
-        // TODO
-        // string id = PlayerPrefs.GetString("hiScoreID");
-        string id = playerName;
+        string id = PlayerPrefs.GetString("hiScoreID");
         LootLockerSDKManager.SubmitScore(id, scoreToUpload, leaderboardID, (response) =>
         {
             if(response.success) {
@@ -159,8 +152,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void SetPlayerNameLocker() {
-        // LootLockerSDKManager.SetPlayerName(PlayerPrefs.GetString("playerID"), (response) => {
-        LootLockerSDKManager.SetPlayerName(playerName, (response) => {
+        LootLockerSDKManager.SetPlayerName(PlayerPrefs.GetString("playerID"), (response) => {
             if(response.success) {
                 Debug.Log("Successfully set player name");
             }

@@ -17,15 +17,14 @@ public class PlayerID : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // TODO
-        // if(PlayerPrefs.HasKey("playerID")) {
-        //     playerID = PlayerPrefs.GetString("playerID");
-        //     playerText.text = playerID;
-        //     typeText.text = "looking good! (backspace to edit)";
-        // }
-        // else {
+        if(PlayerPrefs.HasKey("playerID")) {
+            playerID = PlayerPrefs.GetString("playerID");
+            playerText.text = playerID;
+            typeText.text = "looking good! (backspace to edit)";
+        }
+        else {
             playerID = "";
-        // }
+        }
 
     }
 
@@ -43,11 +42,9 @@ public class PlayerID : MonoBehaviour
                 return;
             }
             playerID = playerText.text;
-            // TODO
-            GameManager.Instance.playerName = playerID;
             inputActivated = false;
             typeText.text = "looking good! (backspace to edit)";
-            // PlayerPrefs.SetString("playerID", playerID);
+            PlayerPrefs.SetString("playerID", playerID);
         }
 
 

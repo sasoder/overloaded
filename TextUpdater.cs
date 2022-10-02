@@ -9,8 +9,7 @@ public class TextUpdater : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // TODO
-        // textBox.text = "best: " + PlayerPrefs.GetInt("best") + "\npro best: " + PlayerPrefs.GetInt("bestHard");
+        textBox.text = "best: " + PlayerPrefs.GetInt("best") + "\npro best: " + PlayerPrefs.GetInt("bestHard");
     }
 
     // Update is called once per frame

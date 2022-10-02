@@ -29,12 +29,11 @@ public class SceneLoader : MonoBehaviour
         Destroy(ps, 2f);
         if(scenie.Length > 1) {
             if(scenie == "HardScene") {
-                // TODO
-                // if(PlayerPrefs.GetInt("best") < 15) {
-                //     GameObject.Find("worthy").GetComponent<TextMeshPro>().text = "you're not worthy,\nyet.";
-                //     source.PlayOneShot(hithurt);
-                //     return;
-                // }
+                if(PlayerPrefs.GetInt("best") < 15) {
+                    GameObject.Find("worthy").GetComponent<TextMeshPro>().text = "you're not worthy,\nyet.";
+                    source.PlayOneShot(hithurt);
+                    return;
+                }
             }
             source.Play();
             LevelLoader.Instance.LoadNextLevel(scenie);
